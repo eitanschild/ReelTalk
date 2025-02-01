@@ -25,6 +25,17 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+// Function to sort top-level comments by like count (descending)
+function sortTopLevelComments() {
+  const comments = Array.from(commentsContainer.children);
+  comments.sort((a, b) => {
+    const likeA = parseInt(a.querySelector(".like-btn").innerText.split(" ")[1]);
+    const likeB = parseInt(b.querySelector(".like-btn").innerText.split(" ")[1]);
+    return likeB - likeA;
+  });
+  comments.forEach(comment => commentsContainer.appendChild(comment));
+}
+
 // Fetch movies from TMDb (default: popular)
 async function fetchMovies(query = "popular") {
   const url = `https://api.themoviedb.org/3/movie/${query}?api_key=${API_KEY}&language=en-US&page=1`;
@@ -64,19 +75,23 @@ function openMovie(movie) {
   
   document.getElementById("movie-container").style.display = "none";
   commentSection.style.display = "block";
+  document.body.style.overflow = "hidden"; // Lock background scrolling
 }
 
 // Back button: return to movie list
 backButton.addEventListener("click", () => {
   commentSection.style.display = "none";
   document.getElementById("movie-container").style.display = "block";
+  document.body.style.overflow = "auto"; // Restore scrolling
 });
 
 // Create a comment element with actions and reply section
 function createCommentElement(nickname, text) {
   const commentDiv = document.createElement("div");
   commentDiv.classList.add("comment");
-
+  // Set initial user action attribute (none)
+  commentDiv.setAttribute("data-user-action", "");
+  
   // Comment header with nickname
   const header = document.createElement("div");
   header.classList.add("comment-header");
@@ -143,20 +158,76 @@ function updateStorage() {
 // Event delegation for comment actions
 commentsContainer.addEventListener("click", (e) => {
   const target = e.target;
+  // Like button logic
   if (target.classList.contains("like-btn")) {
-    let current = parseInt(target.innerText.split(" ")[1]);
-    current++;
-    target.innerText = `👍 ${current}`;
+    const commentEl = target.closest(".comment");
+    let currentAction = commentEl.getAttribute("data-user-action") || "";
+    let likeCount = parseInt(target.innerText.split(" ")[1]);
+    const dislikeBtn = commentEl.querySelector(".dislike-btn");
+    let dislikeCount = parseInt(dislikeBtn.innerText.split(" ")[1]);
+    
+    if (currentAction === "like") {
+      // Toggle off like
+      likeCount -= 1;
+      target.innerText = `👍 ${likeCount}`;
+      commentEl.setAttribute("data-user-action", "");
+    } else if (currentAction === "dislike") {
+      // Remove dislike, add like
+      dislikeCount -= 1;
+      dislikeBtn.innerText = `👎 ${dislikeCount}`;
+      likeCount += 1;
+      target.innerText = `👍 ${likeCount}`;
+      commentEl.setAttribute("data-user-action", "like");
+    } else {
+      // No action yet, add like
+      likeCount += 1;
+      target.innerText = `👍 ${likeCount}`;
+      commentEl.setAttribute("data-user-action", "like");
+    }
     updateStorage();
-  } else if (target.classList.contains("dislike-btn")) {
-    let current = parseInt(target.innerText.split(" ")[1]);
-    current++;
-    target.innerText = `👎 ${current}`;
+    // If this is a top-level comment, sort all top-level comments
+    if (commentEl.parentElement.id === "comments-container") {
+      sortTopLevelComments();
+    }
+  }
+  // Dislike button logic
+  else if (target.classList.contains("dislike-btn")) {
+    const commentEl = target.closest(".comment");
+    let currentAction = commentEl.getAttribute("data-user-action") || "";
+    let dislikeCount = parseInt(target.innerText.split(" ")[1]);
+    const likeBtn = commentEl.querySelector(".like-btn");
+    let likeCount = parseInt(likeBtn.innerText.split(" ")[1]);
+    
+    if (currentAction === "dislike") {
+      // Toggle off dislike
+      dislikeCount -= 1;
+      target.innerText = `👎 ${dislikeCount}`;
+      commentEl.setAttribute("data-user-action", "");
+    } else if (currentAction === "like") {
+      // Remove like, add dislike
+      likeCount -= 1;
+      likeBtn.innerText = `👍 ${likeCount}`;
+      dislikeCount += 1;
+      target.innerText = `👎 ${dislikeCount}`;
+      commentEl.setAttribute("data-user-action", "dislike");
+    } else {
+      // No action yet, add dislike
+      dislikeCount += 1;
+      target.innerText = `👎 ${dislikeCount}`;
+      commentEl.setAttribute("data-user-action", "dislike");
+    }
     updateStorage();
-  } else if (target.classList.contains("reply-btn")) {
+    if (commentEl.parentElement.id === "comments-container") {
+      sortTopLevelComments();
+    }
+  }
+  // Toggle reply form
+  else if (target.classList.contains("reply-btn")) {
     const replyForm = target.parentElement.nextElementSibling;
     replyForm.style.display = replyForm.style.display === "flex" ? "none" : "flex";
-  } else if (target.classList.contains("post-reply-btn")) {
+  }
+  // Post a reply
+  else if (target.classList.contains("post-reply-btn")) {
     const replyForm = target.parentElement;
     const replyNicknameInput = replyForm.querySelector(".reply-nickname");
     const replyNickname = replyNicknameInput.value.trim();
@@ -198,6 +269,7 @@ postCommentBtn.addEventListener("click", () => {
     commentsContainer.appendChild(commentEl);
     commentInput.value = "";
     updateStorage();
+    sortTopLevelComments();
   }
 });
 

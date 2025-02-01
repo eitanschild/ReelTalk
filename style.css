@@ -13,9 +13,9 @@ body {
   text-align: center;
 }
 
-/* Header with an enhanced background and tagline */
+/* Header with enhanced background and tagline */
 header {
-  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+  background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)),
               url('https://source.unsplash.com/1600x400/?film,cinema,abstract') no-repeat center center/cover;
   padding: 40px 20px;
   position: relative;
@@ -24,7 +24,7 @@ header {
 h1 {
   font-size: 2.8rem;
   margin-bottom: 10px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
 }
 
 .tagline {
@@ -33,7 +33,6 @@ h1 {
   color: #ddd;
 }
 
-/* Search bar in header */
 #search-bar {
   width: 80%;
   padding: 10px;
@@ -44,7 +43,7 @@ h1 {
 
 /* Hero Section */
 #hero {
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0,0,0,0.6);
   padding: 40px 20px;
   margin: 20px;
   border-radius: 10px;
@@ -87,7 +86,7 @@ h1 {
 }
 
 .movie-card {
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0,0,0,0.8);
   padding: 10px;
   border-radius: 10px;
   cursor: pointer;
@@ -107,7 +106,7 @@ h1 {
 
 .movie-card:hover {
   transform: scale(1.05);
-  background: rgba(255, 87, 51, 0.8);
+  background: rgba(255,87,51,0.8);
 }
 
 /* Comment Section */
@@ -117,8 +116,9 @@ h1 {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh; /* Use min-height to accommodate mobile browser UI changes */
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
   padding: 20px;
   text-align: left;
 }
@@ -212,7 +212,7 @@ h1 {
 
 /* Individual Comment Styling */
 .comment {
-  background: rgba(50, 50, 50, 0.8);
+  background: rgba(50,50,50,0.8);
   padding: 10px;
   margin-bottom: 10px;
   border-radius: 10px;
