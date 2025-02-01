@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ReelTalk - Movie Discussion</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>🎬 ReelTalk</h1>
+    <p class="tagline">Your ultimate destination for movie discussions</p>
+    <input type="text" id="search-bar" placeholder="Search for a movie..." />
+  </header>
+
+  <!-- Hero Section -->
+  <section id="hero">
+    <h2>Welcome to ReelTalk</h2>
+    <p>
+      Discover a world where every movie sparks conversation. At ReelTalk, we bring together cinephiles,
+      casual viewers, and critics alike in an engaging, interactive space to share insights, reviews, and lively debates.
+    </p>
+    <p>
+      Whether you're passionate about blockbusters, indie gems, or timeless classics, our community is here
+      to celebrate the art of cinema. Join us today and experience a modern, elegant platform that transforms your
+      movie-watching experience into a shared adventure.
+    </p>
+    <button id="explore-btn">Explore Movies</button>
+  </section>
+
+  <!-- Movie List -->
+  <main id="movie-container">
+    <div id="movie-list">
+      <!-- Movies will be dynamically added here -->
+    </div>
+  </main>
+
+  <!-- Comment Section -->
+  <div id="comment-section" class="hidden">
+    <div class="comment-header">
+      <button id="back-button">← Back</button>
+      <h2 id="movie-title">Comments for: </h2>
+    </div>
+    <div class="movie-info">
+      <img id="movie-poster" src="" alt="Movie Poster" />
+      <p id="movie-overview"></p>
+    </div>
+    <div class="new-comment">
+      <!-- Nickname is required and locked once set -->
+      <input type="text" id="nickname" placeholder="Your nickname" />
+      <textarea id="comment-input" placeholder="Write your comment..."></textarea>
+      <button id="post-comment">Post Comment</button>
+    </div>
+    <div id="comments-container">
+      <!-- Comments will appear here -->
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

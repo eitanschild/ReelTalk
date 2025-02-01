@@ -1,0 +1,303 @@
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  /* Cinematic background for the entire page */
+  background: url('https://source.unsplash.com/1600x900/?cinema') no-repeat center center/cover;
+  color: #fff;
+  text-align: center;
+}
+
+/* Header with an enhanced background and tagline */
+header {
+  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+              url('https://source.unsplash.com/1600x400/?film,cinema,abstract') no-repeat center center/cover;
+  padding: 40px 20px;
+  position: relative;
+}
+
+h1 {
+  font-size: 2.8rem;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.tagline {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  color: #ddd;
+}
+
+/* Search bar in header */
+#search-bar {
+  width: 80%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+/* Hero Section */
+#hero {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 40px 20px;
+  margin: 20px;
+  border-radius: 10px;
+}
+
+#hero h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+#hero p {
+  font-size: 1.1rem;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+#explore-btn {
+  background: #ff5733;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#explore-btn:hover {
+  background: #e04d2b;
+}
+
+/* Movie List */
+#movie-container {
+  padding: 20px;
+}
+
+#movie-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+}
+
+.movie-card {
+  background: rgba(0, 0, 0, 0.8);
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.3s, background 0.3s;
+  text-align: center;
+}
+
+.movie-card img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.movie-card p {
+  margin-top: 10px;
+  font-size: 1rem;
+}
+
+.movie-card:hover {
+  transform: scale(1.05);
+  background: rgba(255, 87, 51, 0.8);
+}
+
+/* Comment Section */
+#comment-section {
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  overflow-y: auto;
+  padding: 20px;
+  text-align: left;
+}
+
+/* Comment Section Header */
+.comment-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+#back-button {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+#movie-title {
+  font-size: 1.8rem;
+  flex-grow: 1;
+}
+
+/* Movie Info */
+.movie-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+#movie-poster {
+  width: 200px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+#movie-overview {
+  max-width: 600px;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+}
+
+/* New Comment Input Area */
+.new-comment {
+  width: 80%;
+  margin: 0 auto 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#nickname {
+  width: 100%;
+  padding: 8px;
+  border-radius: 5px;
+  font-size: 1rem;
+  border: none;
+}
+
+#comment-input {
+  width: 100%;
+  height: 80px;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 1rem;
+  border: none;
+}
+
+#post-comment {
+  background: #ff5733;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+#post-comment:hover {
+  background: #e04d2b;
+}
+
+/* Comments Container */
+#comments-container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+/* Individual Comment Styling */
+.comment {
+  background: rgba(50, 50, 50, 0.8);
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+
+/* Comment Header with Nickname */
+.comment-header {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.comment-nickname {
+  font-size: 1rem;
+}
+
+/* Comment Content */
+.comment-content {
+  margin-bottom: 5px;
+}
+
+.comment-text {
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+/* Comment Actions */
+.comment-actions {
+  display: flex;
+  gap: 10px;
+  font-size: 0.9rem;
+  margin-top: 5px;
+}
+
+.comment-actions button {
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.comment-actions button:hover {
+  text-decoration: underline;
+}
+
+/* Replies Section */
+.replies {
+  margin-left: 20px;
+  margin-top: 10px;
+}
+
+/* Reply Form */
+.reply-form {
+  margin-top: 10px;
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.reply-form .reply-nickname {
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  border: none;
+}
+
+.reply-form textarea {
+  width: 90%;
+  height: 60px;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 0.9rem;
+  border: none;
+}
+
+.reply-form button {
+  background: #ff5733;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 0.9rem;
+}
+
+.reply-form button:hover {
+  background: #e04d2b;
+}
