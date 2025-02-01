@@ -11,6 +11,7 @@ body {
   background: url('https://source.unsplash.com/1600x900/?cinema') no-repeat center center/cover;
   color: #fff;
   text-align: center;
+  padding-bottom: 80px; /* Extra space at the bottom of the page */
 }
 
 /* Header with enhanced background and tagline */
@@ -116,11 +117,20 @@ h1 {
   top: 0;
   left: 0;
   width: 100%;
-  min-height: 100vh; /* Use min-height to accommodate mobile browser UI changes */
-  overflow-y: auto;
+  height: 120vh; /* Force height to 120vh so there’s extra scrollable area */
+  overflow-y: scroll;
   -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
   padding: 20px;
+  box-sizing: border-box;
   text-align: left;
+  /* Example background – this will usually be set dynamically via JS */
+  background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)),
+              url('https://source.unsplash.com/1600x900/?cinema') no-repeat center center/cover;
+}
+
+/* Spacer element to guarantee extra space at the bottom */
+.spacer {
+  height: 200px;
 }
 
 /* Comment Section Header */
